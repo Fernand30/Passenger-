@@ -3,7 +3,6 @@ package com.passenger;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -30,11 +29,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new PickerPackage(),
             new ImagePickerPackage(),
-            new MapsPackage(),
             new ReactNativeConfigPackage(),
             new ReactNativeI18n(),
+            new MapsPackage(),
             new VectorIconsPackage(),
             new RNDeviceInfo()
       );

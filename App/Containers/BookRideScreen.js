@@ -33,7 +33,7 @@ class BookRideScreen extends Component {
     }
 
     componentDidMount() {
-        //navigator.geolocation.getCurrentPosition(this.renderMapSuccess);
+        navigator.geolocation.getCurrentPosition(this.renderMapSuccess);
     }
 
     renderMapSuccess(pos){

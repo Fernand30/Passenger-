@@ -10,6 +10,83 @@ export default StyleSheet.create({
         height:height*0.8,
         padding:10,margin:15
     },
+    searchModal: {
+        marginTop:height*0.1,
+        backgroundColor:'#fff',
+        height:height*0.8,
+        width: width*0.86,
+        alignSelf: 'center'
+    },
+    modalTitleView:{
+        flexDirection: 'row',
+        backgroundColor: '#2297f4',
+        justifyContent: 'space-between',
+        paddingVertical: width/25,
+        paddingHorizontal: width/20,
+        marginBottom:10
+    },
+    modaltitle:{
+        color: 'white',
+        fontSize: Metrics.tinyFont *20
+    },
+    searchRow:{
+        flexDirection: 'row',
+        flex:1,
+        alignItems:'flex-end',
+        justifyContent:'space-between'
+    },
+    charge:{
+        backgroundColor: '#2297f4',
+        flex:1,
+        paddingVertical :10,
+        justifyContent:'space-between',
+        height: height/12
+    },
+    flexrow:{
+        flexDirection :'row',
+        alignItems:'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: width/25
+    },
+    whitetext:{
+        color: 'white',
+        fontSize: Metrics.tinyFont *16,
+        textAlign: 'center'
+    },
+    seat:{
+        marginLeft: 5,
+        backgroundColor: '#2297f4',
+        flex:0.3,
+        paddingVertical :10,
+        justifyContent:'space-between',
+        height: height/12
+    },
+    search1:{
+        textAlign: 'center',
+        fontSize: Metrics.tinyFont *23,
+        fontWeight: '700',
+        marginTop: 10,
+        lineHeight: 0
+    },
+    marker:{
+        width: 40,
+        height: 40
+    },
+    search2:{
+        textAlign: 'center',
+        fontSize: Metrics.tinyFont *18,
+        marginTop: 10
+    },
+    map: {
+        width: width /2,
+        height: width /2,
+        alignSelf: 'center',
+        borderRadius: width/4,
+        marginTop :15,
+        marginBottom: 5,
+        borderWidth:10,
+        borderColor: 'black'
+    },
     ModalView:{
         flex: 1,
         flexDirection: 'column'

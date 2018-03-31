@@ -69,3 +69,12 @@ The `.env` file is ignored by git keeping those secrets out of your repo.
 
 ## Generate Sign Apk
 $ keytool -genkey -v -keystore trippstarpassenger.keystore -alias trippstarpassenger -keyalg RSA -keysize 2048 -validity 10000
+
+
+cd android && ./gradlew assembleRelease
+
+
+## Generate icon
+npm install -g yo generator-rn-toolbox
+brew install imagemagick
+yo rn-toolbox:assets --icon icon.png

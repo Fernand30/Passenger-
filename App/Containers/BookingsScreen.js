@@ -7,6 +7,7 @@ import styles from './Styles/BookingsScreenStyle';
 import { connect } from 'react-redux';
 import ModalView from '../Components/ModalView';
 import { Images } from '../Themes'
+import MapView from 'react-native-maps';
 const {width} = Dimensions.get("window");
 import  Rating from 'react-native-easy-rating'
 
@@ -15,10 +16,30 @@ class BookingsScreen extends Component {
         super(props);
         this.state={
             modal:false,
+            modal1:false,
             modal2: false,
-            rating: 0
+            rating: 0,
+            latt : 37.78825,
+            long: -122.4324,
+            lattDelta: 0.0922,
+            longDelta: 0.0421,
         }
     }
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition(this.renderMapSuccess.bind(this));
+    }
+
+    renderMapSuccess(pos){
+        var crd = pos.coords;
+        this.setState({
+            latt: crd.latitude,
+            long: crd.longitude,
+            lattDelta: 0.0922,
+            longDelta: 0.0421
+        })
+    }
+    
     headerLeftContent(){
         return(
             <Text style={[styles.header, styles.leftHeader]}>JANUARY</Text>
@@ -146,6 +167,51 @@ class BookingsScreen extends Component {
         )
     }
 
+    modalContent1(){
+        return(
+            <View style={styles.searchModal}>
+                <View style={styles.modalTitleView}>
+                    <TouchableOpacity>
+                        <Text style={styles.modaltitle}>DECLINE</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.setState({modal1:false})}>
+                        <Text style={styles.modaltitle}>ACCEPT</Text>
+                    </TouchableOpacity>
+                </View>
+                <Text style={styles.search1}>JOB ID: 128</Text>
+                <Text style={styles.search1}>PICK UP LOCATION</Text>
+                <Text style={styles.search2}>8080 W Tropical pkwy, Las Vergas,{'\n'}NV 89149, USA</Text>
+                <MapView
+                    style={styles.map}
+                    region={{latitude: this.state.latt, longitude: this.state.long, latitudeDelta: this.state.lattDelta, longitudeDelta: this.state.longDelta }}
+                    >
+                    <MapView.Marker coordinate={{latitude: this.state.latt+0.02, longitude: this.state.long+0.01 }}>
+                      <Image
+                        source={Images.marker}
+                        style={styles.marker}
+                      />
+                    </MapView.Marker>
+                </MapView>
+                <Text style={styles.search1}>DROP LOCATION</Text>
+                <Text style={styles.search2}>7941 W Tropical pkwy, Las Vergas,{'\n'}NV 89149, USA</Text>
+                <View style={styles.searchRow}>
+                    <View style={styles.charge}>
+                        <Text style={styles.whitetext}>Estimated charges</Text>
+                        <View style={styles.flexrow}>
+                            <Text style={styles.whitetext}>$225.9</Text>
+                            <Text style={styles.whitetext}>10 Miles</Text>
+                            <Text style={styles.whitetext}>35 Min</Text>
+                        </View>
+                    </View>
+                    <View style={styles.seat}>
+                        <Text style={styles.whitetext}>$225.9</Text>
+                        <Text style={styles.whitetext}>10 Miles</Text>
+                    </View>
+                </View>
+            </View>
+        )
+    }
+
     modalContent(){
         return(
             <View style={styles.MainView}>
@@ -225,50 +291,54 @@ class BookingsScreen extends Component {
                                 </View>
                             </View>
                         </TouchableOpacity>
-
                     </View>
                     <View style={styles.item}>
                         <ListHeader leftContent={this.headerLeftContent()} rightContent={this.headerRightContent()} />
                         <TouchableOpacity onPress ={()=>{this.setState({modal: true})}}>
-                        <View style={styles.subItem}>
-                            <View style={styles.partition1}>
-                                <Image source={Images.placeholder} style={styles.placeholder}/>
+                            <View style={styles.subItem}>
+                                <View style={styles.partition1}>
+                                    <Image source={Images.placeholder} style={styles.placeholder}/>
+                                </View>
+                                <View style={styles.partition2}>
+
+                                            <Text style={styles.childStyle1}>Pickup Location</Text>
+
+                                            <Text style={styles.childStyle2}>Historical Library & Museum</Text>
+                                        <View style={styles.marginView}>
+                                            <Text style={styles.childStyle1}>Destination Location</Text>
+
+                                            <Text style={styles.childStyle2}>My Home</Text>
+                                        </View>
+                                </View>
                             </View>
-                            <View style={styles.partition2}>
-
-                                        <Text style={styles.childStyle1}>Pickup Location</Text>
-
-                                        <Text style={styles.childStyle2}>Historical Library & Museum</Text>
-                                    <View style={styles.marginView}>
-                                        <Text style={styles.childStyle1}>Destination Location</Text>
-
-                                        <Text style={styles.childStyle2}>My Home</Text>
-                                    </View>
-                            </View>
-                        </View>
                         </TouchableOpacity>
                         <ModalView modalContent={this.modalContent2.bind(this)}  modalVisible={this.state.modal2}/>
                         <ModalView modalContent = {this.modalContent.bind(this)} modalVisible={this.state.modal}/>
+                        <ModalView modalContent = {this.modalContent1.bind(this)} modalVisible={this.state.modal1}/>
                     </View>
                     <View style={styles.item}>
                         <ListHeader leftContent={this.headerLeftContent()} rightContent={this.headerRightContent()} />
-                        <View style={styles.subItem}>
-                            <View style={styles.partition1}>
-                                <Image source={Images.placeholder} style={styles.placeholder}/>
+                        <TouchableOpacity onPress={() => {
+                            this.setState({ modal1: true });
+                        }}>
+                            <View style={styles.subItem}>
+                                <View style={styles.partition1}>
+                                    <Image source={Images.placeholder} style={styles.placeholder}/>
+                                </View>
+                                <View style={styles.partition2}>
+
+
+                                            <Text style={styles.childStyle1}>Pickup Location</Text>
+
+                                            <Text style={styles.childStyle2}>Historical Library & Museum</Text>
+                                        <View style={styles.marginView}>
+                                            <Text style={styles.childStyle1}>Destination Location</Text>
+
+                                            <Text style={styles.childStyle2}>My Home</Text>
+                                        </View>
+                                </View>
                             </View>
-                            <View style={styles.partition2}>
-
-
-                                        <Text style={styles.childStyle1}>Pickup Location</Text>
-
-                                        <Text style={styles.childStyle2}>Historical Library & Museum</Text>
-                                    <View style={styles.marginView}>
-                                        <Text style={styles.childStyle1}>Destination Location</Text>
-
-                                        <Text style={styles.childStyle2}>My Home</Text>
-                                    </View>
-                            </View>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
                         <ListHeader leftContent={this.headerLeftContent()} rightContent={this.headerRightContent()} />

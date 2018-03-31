@@ -36,7 +36,8 @@ const images = {
     grayStar : require('../Images/grayStar.png'),
     edit : require('../Images/edit.png'),
     back : require('../Images/back.png'),
-    fromto: require('../Images/fromto.png')
+    fromto: require('../Images/fromto.png'),
+    marker: require('../Images/marker.png')
 }
 
 export default images
